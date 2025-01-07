@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Turret+Road:wght@200;300;400;500;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+
+.main { width: 100%; background-color: #FFFFFF; height: 100vh; }
+
+.side-navbar {
+    position: fixed;
+    height: 100vh;
+    width: 260px;
+    background: url('https://i.postimg.cc/054d9xdf/img.jpg');
+    overflow: hidden;
+    transition: .5s ease;
+}
+
+    .side-navbar.active { width: 60px; }
+    .side-navbar ul { top: 0; left: 0; width: 100%; }
+        .side-navbar ul li { width: 100%; }
+            .side-navbar ul li:hover { background: linear-gradient(to left, #032b5e, #02d4f5); }
+            .side-navbar ul li:first-child { margin-bottom: 1rem; background: none; }
+
+            .side-navbar ul li a {
+                display: block;
+                width: 100%;
+                display: flex;
+                color: #FFFFFF;
+            }
+
+                .side-navbar ul li a .icon {
+                    min-width: 60px;
+                    display: block;
+                    font-size: 25px;
+                    line-height: 60px;
+                    height: 60px;
+                    text-align: center;
+                    text-decoration: none;
+                }
+
+                .side-navbar ul li a .text {
+                    display: block;
+                    padding: 0 10px;
+                    line-height: 60px;
+                    height: 60px;
+                    white-space: nowrap;
+                }
+
+                .side-navbar ul li a h2 { font-family: 'Turret Road';}
+
+.content {
+    position: absolute;
+    width: calc(100% - 260px);
+    left: 260px;
+    min-height: 100vh;
+    transition: .5s ease;
+    background-image: url('https://i.postimg.cc/prv7bv98/pexels-philippedonn-1114690.jpg');
+    background-position: center;
+    background-size: cover;
+
+}
+
+    .content.active { width: calc(100% - 60px); left: 60px; }
+
+.top-navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 20px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
+}
+
+.profile img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    object-position: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#menu-icon { font-size: 34px; cursor: pointer; color: #FFFFFF; }
+
+/*MEDIA QUERIES*/
+
+@media (max-width: 768px) {
+    .content { width: 100%; left: 0; }
+        .content.active { width: calc(100% - 60px); left: 60px; }
+    .side-navbar { width: 60px; left: -60px; }
+        .side-navbar.active { left: 0; }
+}
