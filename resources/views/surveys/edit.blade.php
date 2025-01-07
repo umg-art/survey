@@ -4,12 +4,6 @@
 <div class="container">
     <h2>Edit Survey</h2>
 
- <form action="{{ route('surveys.destroy', $survey->id) }}" method="POST">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-sm btn-danger delete-btn" onclick="return confirm(\'Are you sure you want to delete this survey?\')">Delete</button>
- </form>
-
     <form id="surveyForm" action="{{ route('surveys.update', $survey->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -17,16 +11,12 @@
             <label for="surveyName">Survey Name:</label>
             <input type="text" name="name" id="surveyName" class="form-control mt-3" value="{{ $survey->name }}" required>
         </div>
+
         <div class="form-group">
-            <label for="surveyAge">Age:</label>
-            <input type="number" name="age" id="surveyAge" class="form-control mt-3" value="{{ $survey->age }}" required>
-        </div>
-        <div class="form-group">
-            <label for="surveyGender">Gender:</label>
-            <select name="gender" id="surveyGender" class="form-control mt-3" required>
-                <option value="male" {{ $survey->gender == 'male' ? 'selected' : '' }}>Male</option>
-                <option value="female" {{ $survey->gender == 'female' ? 'selected' : '' }}>Female</option>
-                <option value="other" {{ $survey->gender == 'other' ? 'selected' : '' }}>Other</option>
+            <label for="surveyStatus">Status:</label>
+            <select name="status" id="surveyStatus" class="form-control mt-3" required>
+                <option value="published"  {{ $survey->status == 'published' ? 'selected' : '' }}>Active</option>
+                <option value="draft"  {{ $survey->status == 'draft' ? 'selected' : '' }}>Inactive</option>
             </select>
         </div>
 

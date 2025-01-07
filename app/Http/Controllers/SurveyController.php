@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Survey;
 use App\Models\Question;
 use App\Models\QuestionOption;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -19,31 +18,31 @@ class SurveyController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $survey = Survey::with('survey_Question')->select(['id', 'name', 'age', 'gender']);
-
+            $survey = Survey::with('survey_Question')
+                ->select(['id', 'name', 'status']);
+    
             return DataTables::of($survey)
                 ->addColumn('questions', function ($survey) {
-                    // Get all questions and join them with line breaks
                     return $survey->survey_Question->pluck('question_text')->implode('<br>');
                 })
                 ->addColumn('action', function ($survey) {
                     return '
-                    <a href="' . route('surveys.edit', $survey->id) . '" class="btn btn-sm btn-primary edit-btn">Edit</a>
-
-                  <form action="' . route('surveys.destroy', $survey->id) . '" method="POST" style="display: inline-block;">
-                     <input type="hidden" name="_token" value="' . csrf_token() . '">
-                     <input type="hidden" name="_method" value="DELETE">
-                     <button type="submit" class="btn btn-sm btn-danger delete-btn" onclick="return confirm(\'Are you sure you want to delete this survey?\')">Delete</button>
-                 </form>
+                        <a href="' . route('surveys.edit', $survey->id) . '" class="btn btn-sm btn-primary edit-btn">Edit</a>
+                        <form action="' . route('surveys.destroy', $survey->id) . '" method="POST" style="display: inline-block;">
+                            <input type="hidden" name="_token" value="' . csrf_token() . '">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-sm btn-danger delete-btn" onclick="return confirm(\'Are you sure you want to delete this survey?\')">Delete</button>
+                        </form>
                     ';
                 })
-                ->rawColumns(['questions', 'action']) // Mark HTML content as raw
+                ->rawColumns(['questions', 'action'])
                 ->addIndexColumn()
                 ->make(true);
         }
-
+    
         return view('surveys.index');
     }
+    
 
     public function edit($id)
     {
@@ -55,9 +54,7 @@ class SurveyController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'age' => 'required|integer',
-            'gender' => 'required|string',
-            'questions' => 'required|array',
+            'status' => 'required|integer',
         ]);
 
         $survey = Survey::findOrFail($id);
@@ -98,18 +95,10 @@ class SurveyController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string',
-            'survey_name' => 'required|string',
-            'age' => 'required|integer',
-            'gender' => 'required|string',
+            'status' => 'required|string',
         ]);
 
-        $user =  $request->validate(([
-            'name' => 'required|string',
-            'age' => 'required|integer',
-            'gender' => 'required|string',
-        ]));
         $survey = Survey::create($validated);
-        User::create($user);
 
         foreach ($request->questions as $questionData) {
             $question = Question::create([

@@ -12,5 +12,11 @@
                 <span class="text">Survey</span>
             </a>
         </li>
+        <li>
+            <a href="/user">
+                <span class="icon"><i class='bx bxs-home-circle'></i></span>
+                <span class="text">User survey</span>
+            </a>
+        </li>
     </ul>
 </div>

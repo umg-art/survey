@@ -10,9 +10,7 @@
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Age</th>
-                <th>Gender</th>
-                <th>Questions</th>
+                <th>Status</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -37,16 +35,7 @@
             columns: [
                 { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                 { data: 'name', name: 'name' },
-                { data: 'age', name: 'age' },
-                { data: 'gender', name: 'gender' },
-                { data: 'questions', name: 'questions', orderable: false, searchable: false,
-                  render: function (data, type, row) {
-                    if (data.length > 100) {
-                        return data.substring(0, 100) + '...';
-                    }
-                    return data;
-                 }
-                },
+                { data: 'status', name: 'status' }, 
                 { data: 'action', name: 'action', orderable: false, searchable: false,  },
             ]
         });
