@@ -20,11 +20,8 @@ class SurveyController extends Controller
         if ($request->ajax()) {
             $survey = Survey::with('survey_Question')
                 ->select(['id', 'name', 'status']);
-    
+
             return DataTables::of($survey)
-                ->addColumn('questions', function ($survey) {
-                    return $survey->survey_Question->pluck('question_text')->implode('<br>');
-                })
                 ->addColumn('action', function ($survey) {
                     return '
                         <a href="' . route('surveys.edit', $survey->id) . '" class="btn btn-sm btn-primary edit-btn">Edit</a>
@@ -35,14 +32,14 @@ class SurveyController extends Controller
                         </form>
                     ';
                 })
-                ->rawColumns(['questions', 'action'])
+                ->rawColumns(['action'])
                 ->addIndexColumn()
                 ->make(true);
         }
-    
+
         return view('surveys.index');
     }
-    
+
 
     public function edit($id)
     {

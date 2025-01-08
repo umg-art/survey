@@ -4,7 +4,7 @@
 <div class="container">
     <h2>Edit Survey</h2>
 
-    <form id="surveyForm" action="{{ route('surveys.update', $survey->id) }}" method="POST">
+    <form id="surveyForm" action="{{ route('survey.submit', $survey->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">

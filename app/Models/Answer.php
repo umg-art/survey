@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'question_id', 'answer'];
+    protected $fillable = ['user_id', 'question_id', 'answer', 'survey_id'];
 
     public function user()
     {
@@ -18,6 +18,11 @@ class Answer extends Model
     public function question()
     {
         return $this->belongsTo(Question::class);
+    }
+
+    public function survey()
+    {
+        return $this->belongsTo(Survey::class);
     }
 
 }

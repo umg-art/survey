@@ -13,7 +13,7 @@
             </a>
         </li>
         <li>
-            <a href="/user">
+            <a href="/user/surveys">
                 <span class="icon"><i class='bx bxs-home-circle'></i></span>
                 <span class="text">User survey</span>
             </a>

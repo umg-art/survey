@@ -21,8 +21,9 @@ Route::get("/", function(){
  });
 Route::resource('surveys', SurveyController::class);
 Route::get('survey/{id}', [SurveyResponseController::class, 'show']);
-Route::post('survey/{id}/submit', [SurveyResponseController::class, 'submit']);
 Route::get('survey/{surveyId}/report', [SurveyReportController::class, 'index']);
 
-
+Route::get('user/surveys', [SurveyResponseController::class, 'getSurvey']);
+Route::get('user/surveys/{id}', [SurveyResponseController::class, 'getSurveyById']);
+Route::post('survey/submit/{id}', [SurveyResponseController::class, 'submit']);
 

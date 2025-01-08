@@ -16,6 +16,27 @@ class SurveyResponseController extends Controller
         return view('surveys.take', compact('survey'));
     }
 
+    public function getSurvey(Request $request) {
+      if($request) {
+        $survey = Survey::all();
+         if(count($survey) > 0) {
+            // dd($survey);
+            return view('user.index', compact('survey'))->with('success', 'Survey fetch successfully!');
+         }
+         else {
+            return view('user.index')->with('success', 'Survey fetch successfully!');
+         }
+      }
+    }
+
+    public function getSurveyById($id) {
+        if($id) {
+            $survey = Survey::with('survey_Question.survey_QuestionOption')->findOrFail($id);
+            // dd($survey->survey_Question);
+            return view('user.getsurvey', compact('survey'));
+        }
+      }
+
     public function submit(Request $request, $id)
     {
         // Store user info

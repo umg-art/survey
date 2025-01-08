@@ -10,7 +10,9 @@
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
 }
-
+a {
+    text-decoration: none;
+}
 .main { width: 100%; background-color: #FFFFFF; height: 100vh; }
 
 .side-navbar {
